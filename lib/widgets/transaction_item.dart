@@ -9,13 +9,11 @@ class TransactionItem extends StatelessWidget {
     @required this.transactions,
     @required this.mediaQuery,
     @required this.deleteTransaction,
-    @required this.index,
   }) : super(key: key);
 
-  final List<Transaction> transactions;
+  final Transaction transactions;
   final MediaQueryData mediaQuery;
   final Function deleteTransaction;
-  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -31,22 +29,22 @@ class TransactionItem extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: FittedBox(
-              child: Text('\$${transactions[index].amount}'),
+              child: Text('\$${transactions.amount}'),
             ),
           ),
         ),
         title: Text(
-          transactions[index].title,
+          transactions.title,
           style: Theme.of(context).textTheme.headline6,
         ),
         subtitle: Text(
           DateFormat.yMMMd().format(
-            transactions[index].date,
+            transactions.date,
           ),
         ),
         trailing: mediaQuery.size.width > 460
             ? FlatButton.icon(
-                onPressed: () => deleteTransaction(transactions[index].id),
+                onPressed: () => deleteTransaction(transactions.id),
                 icon: Icon(Icons.delete),
                 textColor: Theme.of(context).errorColor,
                 label: Text('Delete'),
@@ -54,7 +52,7 @@ class TransactionItem extends StatelessWidget {
             : IconButton(
                 icon: Icon(Icons.delete),
                 color: Theme.of(context).errorColor,
-                onPressed: () => deleteTransaction(transactions[index].id),
+                onPressed: () => deleteTransaction(transactions.id),
               ),
       ),
     );
